@@ -1,0 +1,5 @@
+(library
+  (name events)
+  (public_name democaml.events)
+  (libraries base democaml.common)
+  (preprocess (pps ppx_jane)))

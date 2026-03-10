@@ -1,5 +1,14 @@
 (library
   (name democaml)
   (public_name democaml)
-  (libraries base pbrt lwt stdio common bitread sendtables)
+  (libraries base
+			 pbrt
+			 lwt
+			 stdio
+			 common
+			 democaml_msg
+			 bitread
+			 sendtables
+			 events
+			 game_events)
   (preprocess (pps ppx_jane)))
