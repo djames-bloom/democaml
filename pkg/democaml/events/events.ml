@@ -128,4 +128,63 @@ type weapon_reload = {
 	player: player option;
 }
 
+type grendae_event = {
+	grenade_type: equipment_type;
+	grenade: equipment option;
+	position: vec3;
+	thrower: player option;
+	grenade_entity_id: int;
+}
+
+type he_explode = {
+	grenade_event: grenade_event;
+}
+
+type flash_explode = {
+	grenade_event: grenade_event;
+}
+
+type decoy_start = {
+	grenade_event: grenade_event;
+}
+
+type decoy_expired = {
+	grenade_event: grenade_event;
+}
+
+type smoke_start = {
+	grenade_event: grenade_event;
+}
+
+type smoke_expired = {
+	grenade_event: grenade_event;
+}
+
+type fire_grenade_start = {
+	grenade_event: grenade_event;
+}
+
+type fire_grenade_expired = {
+	grenade_event: grenade_event;
+}
+
+type grenade_projectile_bounce = {
+	projectile: grenade_projectile;
+	bounce_nr: int;
+}
+
+type grenade_projectile_throw = {
+	projectile: grenade_projectile;
+}
+
+type grenade_projectile_destroy = {
+	projectile: grenade_projectile;
+}
+
+type player_flashed = {
+	player: player option;
+	attacker: player option;
+	projectile: grenade_projectile option;
+}
+
 
