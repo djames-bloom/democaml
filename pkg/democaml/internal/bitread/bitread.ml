@@ -25,3 +25,33 @@ let read_bits t n =
 	t.pos := !(t.pos) + n;
 	res
 
+let read_int t n =
+	let bits = read_bits t n in
+	Int32.of_int_exn bits
+
+let read_float t =
+	let bits = read_bits t 32 in
+	Int32.float_of_bits (Int32.of_int_exn bits)
+
+let read_varint t =
+	let rec loop shift res =
+		let byte = read_bits t 8 in
+		let res = res lor ((byte land 0x7f) lsl shift) in
+		if byte land 0x80 = 0 then res
+		else loop (shift + 7) res
+	in
+	loop 0 0
+
+let read_signed_varint t =
+	let res = read_varint t in
+	(res lsr 1) land (-(res land 1))
+
+let read_string t =
+	let rec loop acc =
+		let byte = read_bits t 8 in
+		if byte = 0 then String.of_char_list (List.rev acc)
+		else loop (Char.of_int_exn byte :: acc)
+	in
+	loop []
+
+
