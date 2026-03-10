@@ -1,0 +1,5 @@
+(library
+  (name bitread)
+  (public_name democaml.bitread)
+  (libraries base)
+  (preprocess (pps ppx_jane)))

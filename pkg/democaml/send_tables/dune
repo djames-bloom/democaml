@@ -1,0 +1,5 @@
+(library
+	(name sendtables)
+	(public_name democaml.sendtables)
+	(libraries base democaml.common)
+	(preprocess (pps ppx_jane)))
