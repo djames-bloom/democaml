@@ -117,3 +117,14 @@ let parse_header (p: parser) : (header, exn) Result.t =
 	p.header <- Some header;
 	Result.Ok header
 | _ -> Result.Error (Failure "invalid magic number for provided file")
+
+
+let parse_to_end (p: parser) : (unit, exn) Result.t =
+	let rec loop () =
+		(* TODO: frame parser*)
+		Result.Ok ()
+	in
+	try
+		loop()
+	with
+	| exn -> Result.Error exn
