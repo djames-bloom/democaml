@@ -58,6 +58,11 @@ type player = {
 	buttons_pressed_state: int64;
 }
 
+and equipment = {
+	equipment_type: equipment_type;
+	owner: player option;
+}
+
 type team_state = {
 	score: int;
 	clan_name: string;
@@ -67,11 +72,6 @@ type player_info = {
 	name: string;
 	steam_id: int64;
 	user_id: int;
-}
-
-type equipment = {
-	equipment_type: equipment_type;
-	owner: player option;
 }
 
 type hostage = {
