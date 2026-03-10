@@ -42,6 +42,9 @@ let read_varint t =
 	in
 	loop 0 0
 
+let read_varin32 t =
+	read_varint t
+
 let read_signed_varint t =
 	let res = read_varint t in
 	(res lsr 1) land (-(res land 1))
