@@ -1,0 +1,5 @@
+(library
+  (name democaml)
+  (public_name democaml)
+  (libraries base pbrt lwt stdio)
+  (preprocess (pps ppx_jane)))
