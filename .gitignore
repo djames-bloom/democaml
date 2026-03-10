@@ -18,4 +18,5 @@ setup.log
 *.install
 _opam/
 
+*.proto
 *.dem
