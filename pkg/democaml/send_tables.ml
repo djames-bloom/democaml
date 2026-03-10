@@ -37,3 +37,15 @@ type entity = {
 	properties: (string, property) Hashtbl.t;
 }
 
+let get_property (entity: entity) (name: string) : property_value option =
+	match Hashtbl.find entity.properties name with
+	| Some prop -> Some prop.value
+	| None -> None
+
+let create_entity (id: int) (serial: int) (server_class: server_class) : entity = {
+	id;
+	serial;
+	server_class;
+	active = true;
+	properties = Hashtbl.create (module String);
+}
