@@ -78,7 +78,7 @@ type round_mvp_announcement = {
 
 type player_team_change = {
 	player: player option;
-	old_team_state: team_stat option;
+	old_team_state: team_state option;
 	new_team_state: team_state option;
 	old_team: team;
 	new_team: team;
@@ -130,7 +130,7 @@ type weapon_reload = {
 	player: player option;
 }
 
-type grendae_event = {
+type grenade_event = {
 	grenade_type: equipment_type;
 	grenade: equipment option;
 	position: vec3;
