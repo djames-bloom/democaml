@@ -8,4 +8,8 @@
 	val read_varint32 : t -> int
 	val read_signed_varint : t -> int
 	val read_string : t -> string
+	val read_bits_as_int64 : t -> int -> Int64.t
+	val read_cstring : t -> int -> string
+	val read_bytes : t -> int -> bytes
+	val skip_bits : t -> int -> unit
 

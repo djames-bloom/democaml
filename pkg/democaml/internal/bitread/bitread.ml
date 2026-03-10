@@ -42,7 +42,7 @@ let read_varint t =
 	in
 	loop 0 0
 
-let read_varin32 t =
+let read_varint32 t =
 	read_varint t
 
 let read_signed_varint t =
@@ -57,4 +57,39 @@ let read_string t =
 	in
 	loop []
 
+let read_bits_as_int64 t n =
+	let rec loop acc i =
+	if i >= n then acc
+	else
+		let bit_pos = !(t.pos) + i in
+		let byte_pos = bit_pos / 8 in
+		let bit_in_byte = 7 - (bit_pos % 8) in
+		let byte = Bytes.get t.buf byte_pos |> Char.to_int in
+		let bit = (byte lsr bit_in_byte) land 1 in
+		loop Int64.((acc lsl 1) lor of_int bit) (i + 1)
+	in
+	t.pos := !(t.pos) + n;
+	loop Int64.zero 0
+
+let read_cstring t length =
+	let rec loop acc i =
+		if i >= length then String.of_char_list (List.rev acc)
+		else
+			let byte = read_bits t 8 in
+			if byte = 0 then String.of_char_list (List.rev acc)
+			else loop (Char.of_int_exn byte :: acc) (i + 1)
+	in
+	loop [] 0
+
+
+let read_bytes t n =
+	let bytes = Bytes.create n in
+	for i = 0 to n - 1 do
+		let byte = read_bits t 8 in
+		Bytes.set bytes i (Char.of_int_exn byte)
+	done;
+	bytes
+
+let skip_bits t n =
+	t.pos := !(t.pos) + n
 
