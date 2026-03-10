@@ -187,4 +187,47 @@ type player_flashed = {
 	projectile: grenade_projectile option;
 }
 
+type bomb_event = {
+	player: player option;
+	site: char;
+}
+
+type bomb_plant_begin = {
+	bomb_event: bomb_event;
+}
+
+type bomb_plant_aborted = {
+	bomb_event: bomb_event;
+}
+
+type bomb_planted = {
+	bomb_event: bomb_event;
+}
+
+type bomb_defused = {
+	bomb_event: bomb_event;
+}
+
+type bomb_explode = {
+	bomb_event: bomb_event;
+}
+
+type bomb_defuse_start = {
+	player: player option;
+	has_kit: bool;
+}
+
+type bomb_defuse_aborted = {
+	player: player option;
+}
+
+type bomb_dropped = {
+	player: player option;
+	entity_id: int;
+}
+
+type bomb_pickup = {
+	player: player option;
+}
+
 
