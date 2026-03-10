@@ -24,7 +24,7 @@
 		| DEM_SpawnGroups
 		| DEM_AnimationData
 		| DEM_AnimationHeader
-		| DEM_Recover
+		| DEM_Recovery
 		| DEM_Max
 		| DEM_IsCompressed
 
@@ -48,7 +48,7 @@
 		| 15 -> DEM_SpawnGroups
 		| 16 -> DEM_AnimationData
 		| 17 -> DEM_AnimationHeader
-		| 18 -> DEM_Recover
+		| 18 -> DEM_Recovery
 		| 19 -> DEM_Max
 		| 64 -> DEM_IsCompressed
 		| _  -> DEM_Error
