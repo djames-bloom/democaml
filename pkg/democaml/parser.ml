@@ -83,3 +83,32 @@ let create (reader: Bitread.t) (config: parser_config) : parser =
 		entities = Hashtbl.create (module Int);
 		err = None;
 	}
+
+let parse_header (p: parser) : (header, exn) Result.t =
+	let filestamp =
+		match p.config.format with
+		| DemoFormatCSTVBroadcast -> "PBDEMS2" (* source 2 fmt *)
+		| DemoFormatStandard	  -> Bitread.read_cstring p.bit_reader 8 (* legacy *)
+	in
+	match filestamp with
+	| "HL2DEMO" ->
+		Result.Error (Failure "unsupported engine version (downgrade to dem3)")
+	| "PBDEMS2" ->
+		(match p.config.format with
+			| DemoFormatCSTVBroadcast -> ()
+			| DemoFormatStandard	  -> Bitread.skip_bits p.bit_reader (8 * 8));
+
+	let header = {
+		filestamp;
+		network_protocol = 0;
+		server_name = "";
+		client_name = "";
+		map_name = "";
+		game_directory = "";
+		playback_time = 0.0;
+		playback_ticks = 0;
+		playback_frames = 0;
+	} in
+	p.header <- Some header;
+	Result.Ok header
+| _ -> Result.Error (Failure "invalid magic number for provided file")
