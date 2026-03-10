@@ -20,3 +20,6 @@ type parser
 	(* parse all frames until end *)
 	val parse_to_end : parser -> (unit, exn) Result.t
 
+	(* parse each frame *)
+	val parse_frame : parser -> bool
+

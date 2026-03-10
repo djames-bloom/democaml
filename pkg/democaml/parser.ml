@@ -128,3 +128,32 @@ let parse_to_end (p: parser) : (unit, exn) Result.t =
 		loop()
 	with
 	| exn -> Result.Error exn
+
+
+let parse_frame (p: parser) : bool  =
+	let cmd_raw = Bitread.read_varint32 p.bit_reader in
+	let _cmd = demo_command_of_int cmd_raw in
+	let msg_type = cmd_raw land lnot 64 in (* lzma bit *)
+	let _compressed = not ((cmd_raw land 64) = 0) in
+
+	let _tick =
+		match p.config.format with
+		| DemoFormatCSTVBroadcast ->
+			let t = Bitread.read_int p.bit_reader 32 in
+			Bitread.skip_bits p.bit_reader 8;
+			Int32.to_int_exn t
+		| DemoFormatStandard ->
+			let offset = ((512 * 1024 * 1024 * 8) - 1) in (* 512kb *)
+			let t = Bitread.read_varint32 p.bit_reader in
+			if t = offset then 0 else t
+	in
+
+	if msg_type = 0 then (* DEM_Stop *)
+		false
+	else
+		let size = Bitread.read_varint32 p.bit_reader in
+		let _buf = Bitread.read_bytes p.bit_reader size in
+
+		true
+
+
