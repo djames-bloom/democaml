@@ -73,3 +73,59 @@ type round_mvp_announcement = {
 	player: player option;
 	reason: round_mvp_reason;
 }
+
+type player_team_change = {
+	player: player option;
+	old_team_state: team_stat option;
+	new_team_state: team_state option;
+	old_team: team;
+	new_team: team;
+	silent: bool;
+	is_bot: bool;
+}
+
+type footstep = {
+	player: player option;
+}
+
+type player_jump = {
+	player: player option;
+}
+
+type player_sound = {
+	player: player option;
+	radius: int;
+	duration: float;
+}
+
+type kill = {
+	weapon: equipment option;
+	victim: player option;
+	killer: player option;
+	assister: player option;
+	penetrated_objects: int;
+	is_headshot: bool;
+	assisted_flash: bool;
+	attacker_blind: bool;
+	no_scope: bool;
+	through_smoke: bool;
+	distance: float;
+}
+
+let is_wallbang (k: kill) =
+	k.penetrated_objects > 0
+
+type bot_taken_over = {
+	taker: player option;
+}
+
+type weapon_fire = {
+	shooter: player option;
+	weapon: equipment option;
+}
+
+type weapon_reload = {
+	player: player option;
+}
+
+
