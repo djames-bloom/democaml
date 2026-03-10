@@ -12,11 +12,13 @@ type round_end_official = unit
 
 type announcement_match_started = unit
 
-type announcemnet_last_round_half = unit
+type announcement_last_round_half = unit
 
 type announcement_final_round = unit
 
 type announcement_win_panel_match = unit
+
+type hostage_resculed_all = unit
 
 type round_end_reason =
 	| StillInProgress
@@ -230,4 +232,23 @@ type bomb_pickup = {
 	player: player option;
 }
 
+type hostage_rescued = {
+	player: player option;
+	hostage: hostage option;
+}
 
+type hostage_hurt = {
+	player: player option;
+	hostage: hostage option;
+}
+
+type hostage_killed = {
+	player: player option;
+	hostage: hostage option;
+}
+
+type hostage_state_changed = {
+	old_state: hostage_state;
+	new_state: hostage_state;
+	hostage: hostage option;
+}
