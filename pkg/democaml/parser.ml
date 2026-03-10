@@ -98,6 +98,11 @@ let parse_header (p: parser) : (header, exn) Result.t =
 			| DemoFormatCSTVBroadcast -> ()
 			| DemoFormatStandard	  -> Bitread.skip_bits p.bit_reader (8 * 8));
 
+	(*
+	   NOTE: header fields are not strictly present in the dem 'header' instead
+	   parsed from game state. Init with minimal header that contains the
+	   filestamp for manip as we load in the required data later.
+	*)
 	let header = {
 		filestamp;
 		network_protocol = 0;
