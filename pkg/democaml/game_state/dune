@@ -1,0 +1,5 @@
+(library
+  (name game_state)
+  (public_name democaml.game_state)
+  (libraries base democaml.common democaml.sendtables)
+  (preprocess (pps ppx_jane)))

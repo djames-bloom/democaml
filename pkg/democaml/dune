@@ -10,5 +10,6 @@
 			 bitread
 			 sendtables
 			 events
-			 game_events)
+			 game_events
+			 game_state)
   (preprocess (pps ppx_jane)))

@@ -1,7 +1,7 @@
 open Base
 open Lwt
 open Common
-open Send_tables
+open Sendtables
 open Bitread
 
 type demo_command =
@@ -69,7 +69,7 @@ type parser = {
 	tick_interval: float;
 	bit_reader: Bitread.t;
 	mutable header: header option;
-	mutable entities: (int, entity) Hashtbl.t;
+	mutable entities: (int, Sendtables.Send_tables.entity) Hashtbl.t;
 	mutable err: exn option;
 }
 
